@@ -8,7 +8,7 @@ import About from './Pages/About'
 import { Toaster } from './components/ui/sonner';
 import { DataAnalytics } from './components/component/data-analytics';
 function App() {
-  console.log("git")
+  // console.log("git")
   const router = createBrowserRouter([
     {
       path: '',
