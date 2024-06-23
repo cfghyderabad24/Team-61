@@ -1,0 +1,38 @@
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{   
+    "userType" : "student",
+    "user" : "test1",
+    "password" : "pass"
+}
+
+###
+POST http://100.72.59.132:5000/signup
+Content-Type: application/json
+
+{
+    "userType" : "student",
+    "password" : "pass",
+    "user" : "test2",
+    "email" : "test2@example.com",
+    "age" : 18,
+    "school" : "Carmel",
+    "city" : "Hyderabad",
+    "source" : "Parents"
+} 
+
+###
+{
+    "userType" : "others",
+    "lead" : "",//Distributer parents educational Insti NGOs
+    "source":"",
+    "for_who" : ""
+}
+
+###
+GET http://localhost:5000/admin/users-by-product/1
+
+###
+GET http://localhost:5000/admin/total-sales-by-product

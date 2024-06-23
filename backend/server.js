@@ -9,8 +9,8 @@ app.use(cors());
 app.use(express.json());
 
 
-const url = 'mongodb+srv://nirvana:nirvana@cluster0.12tcr9y.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-const dbName = 'blogr';
+const url = process.env.MONGO_URL;
+const dbName = 'nirvana';
 
 const client = new MongoClient(url);
 
@@ -19,13 +19,13 @@ async function connect() {
         await client.connect();
         console.log('Connected successfully to MongoDB');
 
-        // const db = client.db(dbName);
+        const db = client.db(dbName);
         // Perform actions on the collection object
-        // const users = db.collection('users')
-        // const blogs = db.collection('blogs')
+        const users = db.collection('users')
+        const admin = db.collection('admin')
 
-        // app.set('users', users)
-        // app.set('blogs', blogs)
+        app.set('users', users)
+        app.set('admin', admin)
         // client.close(); 
     } catch (err) {
         console.error(err);
@@ -36,10 +36,10 @@ async function connect() {
 connect();
 
 // const userApp = require('./api/user')
-// const blogApp = require('./api/blogroute')
-// const auth = require('./api/auth')
+const adminApp = require('./api/admin')
+const auth = require('./api/auth')
 // app.use('/users', userApp)
-// app.use('/blogs', blogApp)
-// app.use('/auth', auth)
+app.use('/admin', adminApp)
+app.use('/', auth)
 
 app.listen(5000, ()=> console.log("server running on port 5000"));

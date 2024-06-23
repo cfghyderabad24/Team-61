@@ -4,8 +4,22 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { ResponsiveLine } from "@nivo/line"
 import { ResponsiveBar } from "@nivo/bar"
 import { ResponsivePie } from "@nivo/pie"
-
+import axios from "axios"
+import React, { useEffect } from "react"
 export function DataAnalytics() {
+  const [data, setData] = React.useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/total-sales-by-product');
+        setData(res.data); // Ensure to extract data from the response
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-muted/40 border-b px-4 lg:px-6 flex items-center h-14">
@@ -33,7 +47,7 @@ export function DataAnalytics() {
           <Card>
             <CardHeader>
               <CardDescription>Total Revenue</CardDescription>
-              <CardTitle>$2,389,000</CardTitle>
+              {/* <CardTitle>$2,389,000</CardTitle> */}
             </CardHeader>
             <CardContent>
               <LineChart className="aspect-[4/3]" />
@@ -42,7 +56,7 @@ export function DataAnalytics() {
           <Card>
             <CardHeader>
               <CardDescription>Gross Profit</CardDescription>
-              <CardTitle>$1,454,000</CardTitle>
+              <CardTitle></CardTitle>
             </CardHeader>
             <CardContent>
               <BarChart className="aspect-[4/3]" />
@@ -51,7 +65,7 @@ export function DataAnalytics() {
           <Card>
             <CardHeader>
               <CardDescription>Net Income</CardDescription>
-              <CardTitle>$986,000</CardTitle>
+              {/* <CardTitle>$986,000</CardTitle> */}
             </CardHeader>
             <CardContent>
               <LineChart className="aspect-[4/3]" />
@@ -60,7 +74,7 @@ export function DataAnalytics() {
           <Card>
             <CardHeader>
               <CardDescription>Cash on Hand</CardDescription>
-              <CardTitle>$3,200,000</CardTitle>
+              {/* <CardTitle>$3,200,000</CardTitle> */}
             </CardHeader>
             <CardContent>
               <PieChart className="aspect-[4/3]" />
@@ -231,12 +245,14 @@ function BarChart(props) {
     <div {...props}>
       <ResponsiveBar
         data={[
-          { name: "Jan", count: 111 },
-          { name: "Feb", count: 157 },
-          { name: "Mar", count: 129 },
-          { name: "Apr", count: 150 },
-          { name: "May", count: 119 },
-          { name: "Jun", count: 72 },
+          { "name": 1, "count": 35 },
+          { "name": 2, "count": 45 },
+          { "name": 3, "count": 82 },
+          { "name": 4, "count": 60 },
+          { "name": 5, "count": 80 },
+          { "name": 6, "count": 75 },
+          { "name": 7, "count": 35 },
+          { "name": 8, "count": 95 }
         ]}
         keys={["count"]}
         indexBy="name"
@@ -281,14 +297,24 @@ function BarChart(props) {
 
 
 function LineChart(props) {
+  const data = [
+    { id: 1, totalSales: 35, monthlySales: { Jan: 5, Feb: 10, Mar: 5, Apr: 5, May: 5, Jun: 5 } },
+    { id: 2, totalSales: 45, monthlySales: { Jan: 7, Feb: 8, Mar: 10, Apr: 6, May: 8, Jun: 6 } },
+    { id: 3, totalSales: 82, monthlySales: { Jan: 12, Feb: 10, Mar: 15, Apr: 13, May: 17, Jun: 15 } },
+    { id: 4, totalSales: 60, monthlySales: { Jan: 10, Feb: 12, Mar: 10, Apr: 9, May: 10, Jun: 9 } },
+    { id: 5, totalSales: 80, monthlySales: { Jan: 14, Feb: 15, Mar: 13, Apr: 12, May: 13, Jun: 13 } },
+    { id: 6, totalSales: 75, monthlySales: { Jan: 12, Feb: 14, Mar: 13, Apr: 12, May: 12, Jun: 12 } },
+    { id: 7, totalSales: 35, monthlySales: { Jan: 5, Feb: 5, Mar: 5, Apr: 5, May: 7, Jun: 8 } },
+    { id: 8, totalSales: 95, monthlySales: { Jan: 16, Feb: 18, Mar: 17, Apr: 15, May: 14, Jun: 15 } }
+  ];
   return (
     <div {...props}>
       <ResponsiveLine
         data={[
           {
-            id: "Desktop",
+            id: 1,
             data: [
-              { x: "Jan", y: 43 },
+              { x: "Jan", y: 50 },
               { x: "Feb", y: 137 },
               { x: "Mar", y: 61 },
               { x: "Apr", y: 145 },
@@ -297,7 +323,7 @@ function LineChart(props) {
             ],
           },
           {
-            id: "Mobile",
+            id: 2,
             data: [
               { x: "Jan", y: 60 },
               { x: "Feb", y: 48 },
