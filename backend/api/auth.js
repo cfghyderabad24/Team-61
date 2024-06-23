@@ -10,29 +10,42 @@ auth.use((req,res,next)=>{
 })
 
 
+
 auth.post("/signup", async (req, res) => {
-  const { user, password } = req.body;
+  const reqObj = req.body;
+
+  // if (!reqObj.userType || !reqObj.password || !reqObj.user || !reqObj.email || !reqObj.age || !reqObj.school || !reqObj.city || !reqObj.source) {
+  //   return res.status(400).json({ message: "Missing required fields" });
+  // }
 
   try {
-      const existingUser = await users.findOne({ user });
-      if (existingUser) {
-        return res.status(400).json({ message: "User already exists" });
-      }
+    const existingUser = await users.findOne({ user: reqObj.user });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
 
-      const hashedPassword = await bcrypt.hash(password, 12);
-      const result = await users.insertOne({ user, password: hashedPassword });
+    const hashedPassword = await bcrypt.hash(reqObj.password, 12);
+    const result = await users.insertOne({
+      userType: reqObj.userType,
+      password: hashedPassword,
+      user: reqObj.user,
+      email: reqObj.email,
+      age: reqObj.age,
+      school: reqObj.school,
+      city: reqObj.city,
+      source: reqObj.source
+    });
 
-      res
-        .status(201)
-        .json({
-          message: "User created successfully",
-          user: result.insertedId,
-        });
+    res.status(201).json({
+      message: "User created successfully",
+      user: result,
+    });
   } catch (error) {
     console.error("Signup error", error);
     res.status(500).json({ message: "Failed to register user" });
-  } 
+  }
 });
+
 
 auth.post("/login", async (req, res) => {
   const userCred = req.body;
