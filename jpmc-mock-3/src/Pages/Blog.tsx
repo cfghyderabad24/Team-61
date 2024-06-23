@@ -66,7 +66,7 @@ const Blog: React.FC = () => {
   };
 
   return (
-    <div className={page flex justify-center items-center h-screen ${pages[currentPage].bgColorClass}}>
+    <div className={`page flex justify-center items-center h-screen ${pages[currentPage].bgColorClass}`}>
       <div className="overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-5 z-0"></div>
       <div className="content max-w-3xl bg-white p-8 rounded-lg shadow-lg text-left m-5 relative z-10">
         <h1 className="mt-0 text-4xl text-gray-800">Explore Learning</h1>

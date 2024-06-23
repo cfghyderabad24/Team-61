@@ -1,3 +1,5 @@
+// import { Config } from 'react-chatbot-kit';
+
 import React from 'react';
 import { Chatbot } from 'react-chatbot-kit';
 import config from './config';
