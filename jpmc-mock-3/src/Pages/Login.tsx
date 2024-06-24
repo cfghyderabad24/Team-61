@@ -36,8 +36,8 @@ const Component = () => {
   return (
     <main className="flex-1 grid grid-cols-1 md:grid-cols-2 h-screen">
       <div className="bg-gray-900 text-white p-8 md:p-12 flex flex-col justify-center">
-        <h1 className="text-3xl font-bold mb-4">Welcome to Acme Inc</h1>
-        <p className="text-gray-400 mb-8">Discover our innovative products and services.</p>
+        <h1 className="text-3xl font-bold mb-4">Welcome to Next Skills 360</h1>
+        {/* <p className="text-gray-400 mb-8">Discover our innovative products and services.</p> */}
         <nav className="flex flex-col gap-4">
           <Link to="#" className="text-sm font-medium hover:underline underline-offset-4">Home</Link>
           <Link to="#" className="text-sm font-medium hover:underline underline-offset-4">Blog</Link>

@@ -4,7 +4,7 @@ const MessageParser = ({ children, actions }) => {
   const parse = (message) => {
     if (message.includes('hello')) {
       actions.handleHello();
-    }
+    } 
     if (message.toLowerCase().includes('what is coding without computer')) {
       actions.handlecodingWithoutComp();
     }
@@ -22,7 +22,7 @@ const MessageParser = ({ children, actions }) => {
     }
 
     // else if(message.includes('What features make the coding kits accessible for visually impaired users')){
-    //   actions.handlecodingKits();
+    //   actions.handlecodingKits();  
     // }  
   };
 

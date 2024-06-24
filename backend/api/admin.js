@@ -46,7 +46,7 @@ const products = [
     { productId: 8, userId: 123, organization: 'Org B', date: '2024-05-30', quantity: 30 },
     { productId: 8, userId: 124, organization: 'Org C', date: '2024-06-05', quantity: 40 },
   ];
-  
+  21  ``
 
 adminApp.get('/users-by-product/:pid', (req, res) => {
 const pid = parseInt(req.params.pid);
